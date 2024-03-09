@@ -14,25 +14,25 @@ class RaceThread : public QThread
 {
     Q_OBJECT
 private:
-    Weather* cls_objWeather;
-    QVector<Car*> cls_objCars;
-    int cls_iMonitoredCar;
-    void APIRequest(QString p_strURL);
-    void SetWeatherData();
-    //QNetworkAccessManager cls_NetworkManager;
-    QNetworkReply* cls_Reply;
-    QJsonArray cls_Results;
-    void InitialiseCars();
-    void SetCarData();
+    Weather* cls_objWeather;                                // Class pointer to Weather object
+    QVector<Car*> cls_objCars;                              // Vector holding pointers to all Car objects
+    int cls_iMonitoredCar;                                  // Vector index of Car object being monitored
+    void APIRequest(QString p_strURL);                      // Requests data from specified URL
+    void SetWeatherData();                                  // Sets data relating to the weather
+    //QNetworkAccessManager cls_NetworkManager;             // Class object of QNetworkAccessManager for requesting from web page
+    QNetworkReply* cls_Reply;                               // Pointer to reply from web page
+    QJsonArray cls_Results;                                 // Data requested from web page in Json format after being parsed
+    void InitialiseCars();                                  // Initialises all cars in race
+    void SetCarData();                                      // Sets data relating to each car
 public:
-    RaceThread();
-    Weather* GetWeatherPoint();
-    Car* GetCarPoint();
-    void run() override;
+    RaceThread();                                           // Default constructor
+    Weather* GetWeatherPoint();                             // Returns a pointer to the Weather object in order to connect signals to slots
+    Car* GetCarPoint();                                     // Returns a pointer to the monitored Car object in order to connect signals to slots
+    void run() override;                                    // Function that is run in alternate thread to handle the updating of real-time data
 public slots:
-    void ParseData();
-    void CalculatePit();
-signals:
+    void ParseData();                                       // Parses reply from web page in Json format
+    void CalculatePit();                                    // Calculates when the monitored car should pit
+signals:                                                    // Emitted when specific value changes
     void PitUrgencyChanged(int p_iUrgency);
 };
 

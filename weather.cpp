@@ -4,6 +4,7 @@ using namespace std;
 
 Weather::Weather(QObject* parent): QObject(parent)
 {
+    // Sets class variables to default values
     this->cls_dAirTemp = 0;
     this->cls_dWindSpeed = 0;
     this->cls_iWindDirection = 0;
@@ -11,13 +12,9 @@ Weather::Weather(QObject* parent): QObject(parent)
     this->cls_iIsRaining = 0;
 }
 
-Weather::~Weather()
-{
-
-}
-
 void Weather::SetData(double p_dAirTemp, double p_dWindSpeed, int p_iWindDirection, double p_dTrackTemp, int p_iIsRaining, int p_iHumidity)
 {
+    //Checks if vales have changed, if so updates the class varible and emits a signal that they have changed
     if (this->cls_dAirTemp != p_dAirTemp)
     {
         this->cls_dAirTemp = p_dAirTemp;
@@ -52,25 +49,25 @@ void Weather::SetData(double p_dAirTemp, double p_dWindSpeed, int p_iWindDirecti
 
 int Weather::GetAirTemp()
 {
-    return this->cls_dAirTemp;
+    return this->cls_dAirTemp;                                                  // Returns air temperature
 }
 
 int Weather::GetWindSpeed()
 {
-    return this->cls_dWindSpeed;
+    return this->cls_dWindSpeed;                                                // Returns wind speed
 }
 
 int Weather::GetWindDirection()
 {
-    return this->cls_iWindDirection;
+    return this->cls_iWindDirection;                                            // Returns wind direction
 }
 
 int Weather::GetTrackTemp()
 {
-    return this->cls_dTrackTemp;
+    return this->cls_dTrackTemp;                                                // Returns track temperature
 }
 
 bool Weather::GetIsRaining()
 {
-    return this->cls_iIsRaining;
+    return this->cls_iIsRaining;                                                // Returns is raining
 }

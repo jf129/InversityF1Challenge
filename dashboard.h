@@ -18,9 +18,9 @@ class Dashboard : public QMainWindow
     Q_OBJECT
 
 public:
-    Dashboard(QWidget *parent = nullptr);
-    ~Dashboard();
-public slots:
+    Dashboard(QWidget *parent = nullptr);                                       // Default constructor
+    ~Dashboard();                                                               // Destructor
+public slots:                                                                   // Changes the state of GUI components relating to the specific value
     void ChangeAirTemp(double p_dAirTemp);
     void ChangeWindSpeed(double p_dWindSpeed);
     void ChangeWindDirection(double p_dWindDirection);
@@ -39,10 +39,10 @@ public slots:
     void PitUrgencyChanged(int p_iUrgency);
 
 private:
-    Ui::Dashboard *ui;
-    RaceThread* cls_objRaceThread;
-    Weather* cls_ptrWeather;
-    Car* cls_ptrCar;
-    void InitGraph();
+    Ui::Dashboard *ui;                                                          // Class GUI object
+    RaceThread* cls_objRaceThread;                                              // Class pointer to RaceThread object
+    Weather* cls_ptrWeather;                                                    // Class pointer to Weather object
+    Car* cls_ptrCar;                                                            // Class pointer to the object of Car thats data is being monitored
+    void InitGraph();                                                           // Initialises the lap and sector time graph
 };
 #endif // DASHBOARD_H

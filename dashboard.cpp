@@ -10,11 +10,12 @@ Dashboard::Dashboard(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->cls_objRaceThread = new RaceThread();
+    this->cls_objRaceThread = new RaceThread();                                                     //  Creates RaceThread object
 
-    this->cls_ptrWeather = this->cls_objRaceThread->GetWeatherPoint();
-    //this->cls_ptrCar = this->cls_objRaceThread->GetCarPoint();
+    this->cls_ptrWeather = this->cls_objRaceThread->GetWeatherPoint();                              // Sets Weather pointer
+    //this->cls_ptrCar = this->cls_objRaceThread->GetCarPoint();                                    // Sets Car pointer
 
+    // Connects signals from weather to slots
     connect(this->cls_ptrWeather, &Weather::AirTempChanged, this, &Dashboard::ChangeAirTemp);
     connect(this->cls_ptrWeather, &Weather::WindSpeedChanged, this, &Dashboard::ChangeAirTemp);
     connect(this->cls_ptrWeather, &Weather::WindDirectionChanged, this, &Dashboard::ChangeAirTemp);
@@ -22,6 +23,7 @@ Dashboard::Dashboard(QWidget *parent)
     connect(this->cls_ptrWeather, &Weather::IsRainingChanged, this, &Dashboard::ChangeAirTemp);
     connect(this->cls_ptrWeather, &Weather::HumidityChanged, this, &Dashboard::ChangeHumidity);
 
+    // Connects signals from car to slots
     /*connect(this->cls_ptrCar, &Car::LapNumChanged, this, &Dashboard::ChangeLapNum);
     connect(this->cls_ptrCar, &Car::AddLapTime, this, &Dashboard::AddLapTime);
     connect(this->cls_ptrCar, &Car::AddSectorTimes, this, &Dashboard::AddSectorTimes);
@@ -34,7 +36,7 @@ Dashboard::Dashboard(QWidget *parent)
 
     this->InitGraph();
 
-    this->cls_objRaceThread->start();                                                                       // Start separate thread to get data from API and update GUI
+    this->cls_objRaceThread->start();                   // Start separate thread to get data from API and update GUI
 }
 
 Dashboard::~Dashboard()
@@ -44,8 +46,11 @@ Dashboard::~Dashboard()
 
 void Dashboard::InitGraph()
 {
-    // Initialise graph
+    // Initialises graph that displays lap and sector times
 }
+
+// ******************************************************************************************
+// Slots that change the relevant GUI elements depending on which value changes
 
 void Dashboard::ChangeAirTemp(double p_dAirTemp)
 {

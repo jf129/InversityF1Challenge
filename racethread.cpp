@@ -18,37 +18,36 @@ RaceThread::RaceThread()
 
 Weather* RaceThread::GetWeatherPoint()
 {
-    return this->cls_objWeather;
+    return this->cls_objWeather;                                        // Returns pointer to weather object
 }
 
 Car* RaceThread::GetCarPoint()
 {
-    return this->cls_objCars[this->cls_iMonitoredCar];
+    return this->cls_objCars[this->cls_iMonitoredCar];                  // Returns pointer to monitored Car object
 }
 
-void RaceThread::run()
+void RaceThread::run()                                                  // Loop that runs in a separate thread to the main events
 {
     while (true)
     {
-        //this->SetWeatherData();
-        //this->SetCarData();
+        //this->SetWeatherData();                                       // Sets weather data
+        //this->SetCarData();                                           // Sets car data
     }
 }
 
 void RaceThread::APIRequest(QString p_strURL)
 {
-    /*connect(&this->cls_NetworkManager, &QNetworkAccessManager::finished, this, &RaceThread::ParseData);
+    // Requests data from given web page
+    /*connect(&this->cls_NetworkManager, &QNetworkAccessManager::finished, this, &RaceThread::ParseData);   // When data has been requested it will automatically be parsed
     const QUrl l_URL = QUrl(p_strURL);
     QNetworkRequest l_Request(l_URL);
     this->cls_Reply = this->cls_NetworkManager.get(l_Request);*/
-
-    //this->ParseData();
 }
 
 void RaceThread::ParseData()
 {
+    // Parses data recieved from web page and sets the parsed data to the class variable
     QByteArray l_Data = this->cls_Reply->readAll();
-    //QByteArray l_Data="{\"session_key\":9472,\"meeting_key\":1229,\"broadcast_name\":\"L HAMILTON\",\"country_code\":\"GBR\",\"first_name\":\"Lewis\",\"full_name\":\"Lewis HAMILTON\",\"headshot_url\":\"https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/L/LEWHAM01_Lewis_Hamilton/lewham01.png.transform/1col/image.png\",\"last_name\":\"Hamilton\",\"driver_number\":44,\"team_colour\":\"27f4d2\",\"team_name\":\"Mercedes\",\"name_acronym\":\"HAM\"},{\"session_key\":9472,\"meeting_key\":1229,\"broadcast_name\":\"G RUSSELL\",\"country_code\":\"GBR\",\"first_name\":\"George\",\"full_name\":\"George RUSSELL\",\"headshot_url\":\"https://media.formula1.com/d_driver_fallback_image.png/content/dam/fom-website/drivers/G/GEORUS01_George_Russell/georus01.png.transform/1col/image.png\",\"last_name\":\"Russell\",\"driver_number\":63,\"team_colour\":\"27f4d2\",\"team_name\":\"Mercedes\",\"name_acronym\":\"RUS\"}";
     QJsonDocument l_JsonDoc = QJsonDocument::fromJson(l_Data);
     this->cls_Results = l_JsonDoc[""].toArray();
 }
