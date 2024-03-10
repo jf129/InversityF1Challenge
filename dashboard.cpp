@@ -13,7 +13,7 @@ Dashboard::Dashboard(QWidget *parent)
     this->cls_objRaceThread = new RaceThread();                                                     //  Creates RaceThread object
 
     this->cls_ptrWeather = this->cls_objRaceThread->GetWeatherPoint();                              // Sets Weather pointer
-    //this->cls_ptrCar = this->cls_objRaceThread->GetCarPoint();                                    // Sets Car pointer
+    this->cls_ptrCar = this->cls_objRaceThread->GetCarPoint();                                      // Sets Car pointer
 
     // Connects signals from weather to slots
     connect(this->cls_ptrWeather, &Weather::AirTempChanged, this, &Dashboard::ChangeAirTemp);
@@ -24,7 +24,7 @@ Dashboard::Dashboard(QWidget *parent)
     connect(this->cls_ptrWeather, &Weather::HumidityChanged, this, &Dashboard::ChangeHumidity);
 
     // Connects signals from car to slots
-    /*connect(this->cls_ptrCar, &Car::LapNumChanged, this, &Dashboard::ChangeLapNum);
+    connect(this->cls_ptrCar, &Car::LapNumChanged, this, &Dashboard::ChangeLapNum);
     connect(this->cls_ptrCar, &Car::AddLapTime, this, &Dashboard::AddLapTime);
     connect(this->cls_ptrCar, &Car::AddSectorTimes, this, &Dashboard::AddSectorTimes);
     connect(this->cls_ptrCar, &Car::BrakeChanged, this, &Dashboard::ChangeBrake);
@@ -32,11 +32,11 @@ Dashboard::Dashboard(QWidget *parent)
     connect(this->cls_ptrCar, &Car::LapPctChanged, this, &Dashboard::ChangeLapPct);
     connect(this->cls_ptrCar, &Car::S1PctChanged, this, &Dashboard::ChangeS1Pct);
     connect(this->cls_ptrCar, &Car::S2PctChanged, this, &Dashboard::ChangeS2Pct);
-    connect(this->cls_ptrCar, &Car::S3PctChanged, this, &Dashboard::ChangeS3Pct);*/
+    connect(this->cls_ptrCar, &Car::S3PctChanged, this, &Dashboard::ChangeS3Pct);
 
     this->InitGraph();
 
-    this->cls_objRaceThread->start();                   // Start separate thread to get data from API and update GUI
+    this->cls_objRaceThread->start();                                                               // Start separate thread to get data from API and update GUI
 }
 
 Dashboard::~Dashboard()
@@ -59,15 +59,15 @@ void Dashboard::ChangeAirTemp(double p_dAirTemp)
 
     if (p_dAirTemp >= 40)
     {
-        ui->frmAirTempCol->setStyleSheet("background-colour: rgb(255, 0, 0");
+        ui->frmAirTempCol->setStyleSheet("background: rgb(230, 0, 0)");
     }
     else if (p_dAirTemp >= 30)
     {
-        ui->frmAirTempCol->setStyleSheet("background-colour: rgb(255, 128, 0");
+        ui->frmAirTempCol->setStyleSheet("background: rgb(255, 128, 0)");
     }
     else
     {
-        ui->frmAirTempCol->setStyleSheet("background-colour: rgb(0, 255, 0");
+        ui->frmAirTempCol->setStyleSheet("background: rgb(0, 150, 0)");
     }
 }
 
@@ -78,15 +78,15 @@ void Dashboard::ChangeWindSpeed(double p_dWindSpeed)
 
     if (p_dWindSpeed >= 20)
     {
-        ui->frmWindSpeedCol->setStyleSheet("background-colour: rgb(255, 0, 0");
+        ui->frmWindSpeedCol->setStyleSheet("background: rgb(230, 0, 0)");
     }
     else if (p_dWindSpeed >= 10)
     {
-        ui->frmWindSpeedCol->setStyleSheet("background-colour: rgb(255, 128, 0");
+        ui->frmWindSpeedCol->setStyleSheet("background: rgb(230, 128, 0)");
     }
     else
     {
-        ui->frmWindSpeedCol->setStyleSheet("background-colour: rgb(0, 255, 0");
+        ui->frmWindSpeedCol->setStyleSheet("background: rgb(0, 150, 0)");
     }
 }
 
@@ -102,15 +102,15 @@ void Dashboard::ChangeTrackTemp(double p_dTrackTemp)
 
     if (p_dTrackTemp >= 50)
     {
-        ui->frmTrackTempCol->setStyleSheet("background-colour: rgb(255, 0, 0");
+        ui->frmTrackTempCol->setStyleSheet("background: rgb(230, 0, 0)");
     }
     else if (p_dTrackTemp >= 40)
     {
-        ui->frmTrackTempCol->setStyleSheet("background-colour: rgb(255, 128, 0");
+        ui->frmTrackTempCol->setStyleSheet("background: rgb(255, 128, 0)");
     }
     else
     {
-        ui->frmTrackTempCol->setStyleSheet("background-colour: rgb(0, 255, 0");
+        ui->frmTrackTempCol->setStyleSheet("background: rgb(0, 150, 0)");
     }
 }
 
@@ -124,17 +124,17 @@ void Dashboard::ChangeHumidity(int p_iHumidity)
     ui->lblHumidityVal->setText(QString::number(p_iHumidity));
     ui->sldHumiditySlide->setValue(p_iHumidity);
 
-    if (p_iHumidity >= 40)
+    if (p_iHumidity >= 60)
     {
-        ui->frmAirTempCol->setStyleSheet("background-colour: rgb(255, 0, 0");
+        ui->frmAirTempCol->setStyleSheet("background: rgb(230, 0, 0)");
     }
-    else if (p_iHumidity >= 30)
+    else if (p_iHumidity >= 40)
     {
-        ui->frmAirTempCol->setStyleSheet("background-colour: rgb(255, 128, 0");
+        ui->frmAirTempCol->setStyleSheet("background: rgb(255, 128, 0)");
     }
     else
     {
-        ui->frmAirTempCol->setStyleSheet("background-colour: rgb(0, 255, 0");
+        ui->frmAirTempCol->setStyleSheet("background: rgb(0, 150, 0)");
     }
 }
 
@@ -198,13 +198,13 @@ void Dashboard::PitUrgencyChanged(int p_iUrgency)
     switch (p_iUrgency)
     {
     case (0):
-        ui->lblPitUrgencyVal->setStyleSheet("background-colour: rgb(255, 0, 0");
+        ui->lblPitUrgencyVal->setStyleSheet("background: rgb(230, 0, 0)");
         break;
     case(1):
-        ui->lblPitUrgencyVal->setStyleSheet("background-colour: rgb(255, 128, 0");
+        ui->lblPitUrgencyVal->setStyleSheet("background: rgb(255, 128, 0)");
         break;
     case (2):
-        ui->lblPitUrgencyVal->setStyleSheet("background-colour: rgb(0, 255, 0");
+        ui->lblPitUrgencyVal->setStyleSheet("background: rgb(0, 150, 0)");
         break;
     }
 }

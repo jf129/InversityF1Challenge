@@ -12,7 +12,7 @@ RaceThread::RaceThread()
 {
     this->cls_iMonitoredCar = 0;
     this->cls_objWeather = new Weather();
-    //this->cls_Reply = nullptr;
+    this->cls_Reply = nullptr;
     this->InitialiseCars();
 }
 
@@ -30,18 +30,18 @@ void RaceThread::run()                                                  // Loop 
 {
     while (true)
     {
-        //this->SetWeatherData();                                       // Sets weather data
-        //this->SetCarData();                                           // Sets car data
+        this->SetWeatherData();                                         // Sets weather data
+        this->SetCarData();                                             // Sets car data
     }
 }
 
 void RaceThread::APIRequest(QString p_strURL)
 {
     // Requests data from given web page
-    /*connect(&this->cls_NetworkManager, &QNetworkAccessManager::finished, this, &RaceThread::ParseData);   // When data has been requested it will automatically be parsed
+    connect(&this->cls_NetworkManager, &QNetworkAccessManager::finished, this, &RaceThread::ParseData);   // When data has been requested it will automatically be parsed
     const QUrl l_URL = QUrl(p_strURL);
     QNetworkRequest l_Request(l_URL);
-    this->cls_Reply = this->cls_NetworkManager.get(l_Request);*/
+    this->cls_Reply = this->cls_NetworkManager.get(l_Request);
 }
 
 void RaceThread::ParseData()

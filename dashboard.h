@@ -20,7 +20,7 @@ class Dashboard : public QMainWindow
 public:
     Dashboard(QWidget *parent = nullptr);                                       // Default constructor
     ~Dashboard();                                                               // Destructor
-public slots:                                                                   // Changes the state of GUI components relating to the specific value
+public slots:                                                                   // Slots that change the state of GUI components relating to the specific value
     void ChangeAirTemp(double p_dAirTemp);
     void ChangeWindSpeed(double p_dWindSpeed);
     void ChangeWindDirection(double p_dWindDirection);

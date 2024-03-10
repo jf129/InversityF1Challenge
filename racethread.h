@@ -19,7 +19,7 @@ private:
     int cls_iMonitoredCar;                                  // Vector index of Car object being monitored
     void APIRequest(QString p_strURL);                      // Requests data from specified URL
     void SetWeatherData();                                  // Sets data relating to the weather
-    //QNetworkAccessManager cls_NetworkManager;             // Class object of QNetworkAccessManager for requesting from web page
+    QNetworkAccessManager cls_NetworkManager;               // Class object of QNetworkAccessManager for requesting from web page
     QNetworkReply* cls_Reply;                               // Pointer to reply from web page
     QJsonArray cls_Results;                                 // Data requested from web page in Json format after being parsed
     void InitialiseCars();                                  // Initialises all cars in race
